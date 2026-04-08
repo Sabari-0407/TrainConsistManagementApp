@@ -1,30 +1,56 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-/**
- * ==============================================================
- * MAIN CLASS - UseCase6TrainConsistMgmnt
- * ==============================================================
- */
+class Bogie {
+    private String name;
+    private int capacity;
+
+    // Constructor
+    public Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    // Display method
+    public void display() {
+        System.out.println(name + " - Capacity: " + capacity);
+    }
+}
+
 public class TrainConsistManagementApp {
-
     public static void main(String[] args) {
-        System.out.println("==============================================");
-        System.out.println(" UC6 - Map Bogie to Capacity (HashMap) ");
-        System.out.println("==============================================\n");
 
-        Map<String, Integer> capacityMap = new HashMap<>();
+        // Step 1: Create a List to store bogies
+        List<Bogie> bogieList = new ArrayList<>();
 
-        capacityMap.put("Sleeper", 72);
-        capacityMap.put("AC Chair", 56);
-        capacityMap.put("First Class", 24);
-        capacityMap.put("Cargo", 120);
+        // Step 2: Add passenger bogies
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("First Class", 24));
 
-        System.out.println("Bogie Capacity Details:");
-        for (Map.Entry<String, Integer> entry : capacityMap.entrySet()) {
-            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        // Step 3: Sort bogies by capacity using Comparator
+        bogieList.sort(Comparator.comparingInt(Bogie::getCapacity));
+
+        // Step 4: Display sorted bogies
+        System.out.println("Bogies sorted by capacity (ascending):");
+        for (Bogie b : bogieList) {
+            b.display();
         }
 
-        System.out.println("\nUC6 bogie-capacity mapping completed...");
+        // Optional: Descending order
+        bogieList.sort(Comparator.comparingInt(Bogie::getCapacity).reversed());
+
+        System.out.println("\nBogies sorted by capacity (descending):");
+        for (Bogie b : bogieList) {
+            b.display();
+        }
     }
 }
